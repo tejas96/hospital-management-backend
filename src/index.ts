@@ -1,7 +1,8 @@
 import app, { initRoutes } from "./routes";
 import bodyParser from "body-parser";
 import { config } from "dotenv";
-var morgan = require("morgan");
+import cors from "cors";
+const morgan = require("morgan");
 
 config();
 
@@ -14,7 +15,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 // apply the body parser middleware to all incoming requests
 app.use(jsonParser);
 app.use(urlencodedParser);
-
+app.use(cors());
 // apply the morgan middleware to log all requests
 app.use(morgan("combined"));
 
