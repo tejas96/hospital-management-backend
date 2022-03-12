@@ -1,7 +1,9 @@
-import inventory from "src/routes/inventory.routes";
-import ipdRoutes from "src/routes/ipd.routes";
-import opdRoutes from "src/routes/opd.routes";
-import hospitalRoutes from "src/routes/hospital.routes";
+import inventory from "./inventory.routes";
+import ipdRoutes from "./ipd.routes";
+import opdRoutes from "./opd.routes";
+import hospitalRoutes from "./hospital.routes";
+import authUserRoutes from "./authUsers.routes";
+import rfpROutes from "./rfp.routes";
 import express from "express";
 
 const app = express();
@@ -18,6 +20,10 @@ export const initRoutes = () => {
 
   //router for hospital
   app.use("/api/v1/hospital", hospitalRoutes);
+
+  app.use("/api/v1/authUser", authUserRoutes);
+
+  app.use("/api/v1/rfp", rfpROutes);
 
   //router for application health check
   app.get("/ping", (_, res) => {
