@@ -8,3 +8,11 @@ export type RFP = {
   updatedAt: string;
   status: RFPStatus;
 };
+
+export type Patient = {
+  id?: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  age: number;
+};

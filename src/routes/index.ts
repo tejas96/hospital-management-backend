@@ -1,6 +1,5 @@
 import inventory from "./inventory.routes";
-import ipdRoutes from "./ipd.routes";
-import opdRoutes from "./opd.routes";
+import ipdOpdRoutes from "./ipd-opd.routes";
 import hospitalRoutes from "./hospital.routes";
 import authUserRoutes from "./authUsers.routes";
 import rfpROutes from "./rfp.routes";
@@ -13,10 +12,7 @@ export const initRoutes = () => {
   app.use("/api/v1/inventory", inventory);
 
   //router for ipd
-  app.use("/api/v1/ipd", ipdRoutes);
-
-  //router for opd
-  app.use("/api/v1/opd", opdRoutes);
+  app.use("/api/v1/ipd-opd", ipdOpdRoutes);
 
   //router for hospital
   app.use("/api/v1/hospital", hospitalRoutes);
