@@ -10,7 +10,7 @@ export const findPatientByPhoneNumber = async (
   if (patient.empty) {
     return null;
   } else {
-    return patient.docs[0].data();
+    return { id: patient.docs[0].id, ...patient.docs[0].data() };
   }
 };
 
