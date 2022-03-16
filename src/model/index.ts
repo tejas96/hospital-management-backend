@@ -16,3 +16,19 @@ export type Patient = {
   phoneNumber: string;
   age: number;
 };
+
+export type WardType = "IPD" | "OPD";
+export type Booking = {
+  id?: string;
+  patientId: string;
+  doctorId: string;
+  dateAndTime: string;
+  createdAt?: string;
+  updatedAt?: string;
+  treatmentType: string;
+  paid: boolean;
+  amount: number;
+  wardType: WardType;
+  isCancelled?: boolean;
+  patientName: string;
+};
