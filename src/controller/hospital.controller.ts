@@ -16,3 +16,5 @@ export const fetchAllDoctors = async (req: Request, res: Response) => {
   }
   return res.status(200).send(doctors);
 };
+
+export const bookRequest = async (req: Request, res: Response) => {};
