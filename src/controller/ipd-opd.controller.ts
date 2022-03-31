@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
+import { sendOTP } from "../utility";
 import { Booking, Patient as PatientDTO } from "../model";
 import { Booking as BookingRepo, Patient } from "../repository";
 import { ParameterDictionary } from "./RequestParamsDictionary";
+
 export const fetchPatientByPhoneNumber = async (
   req: Request<ParameterDictionary>,
   res: Response
@@ -32,6 +34,13 @@ export const bookAppointment = async (req: Request, res: Response) => {
   patientBook.isCancelled = false;
   const booking = await BookingRepo.createAppointment(patientBook);
   if (booking?.id) {
+    const appointmentDate = new Date(+patientBook.dateAndTime);
+    sendOTP(
+      `+91${patientBook.phoneNumber}` || "",
+      `Your appointment is booked for ${appointmentDate.getDate()}/${
+        appointmentDate.getMonth() + 1
+      }/${appointmentDate.getFullYear()} at ${appointmentDate.getHours()}:${appointmentDate.getMinutes()}`
+    );
     res.status(200).send(booking.id);
   } else {
     res.status(500).send("Error creating booking");
