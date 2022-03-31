@@ -27,3 +27,25 @@ export const updateAppointment = async (id: string, data: Booking) => {
     .update(data);
   return res;
 };
+
+export const onlineBookingRequest = async (payload: any) => {
+  const res = await Admin.firestore()
+    .collection("OnlineBookingRequests")
+    .add(payload);
+  return res;
+};
+
+export const fetchAllOnlineBookingRequests = async () => {
+  const allDocs = await Admin.firestore()
+    .collection("OnlineBookingRequests")
+    .get();
+  return allDocs;
+};
+
+export const deleteBookRequest = async (id: string) => {
+  const res = await Admin.firestore()
+    .collection("OnlineBookingRequests")
+    .doc(id)
+    .delete();
+  return res;
+};

@@ -31,4 +31,6 @@ export type Booking = {
   wardType: WardType;
   isCancelled?: boolean;
   patientName: string;
+  isOnlineBooking?: boolean;
+  phoneNumber?: string;
 };

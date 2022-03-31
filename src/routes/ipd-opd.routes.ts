@@ -1,11 +1,9 @@
 import { Router } from "express";
 import { authMiddleware } from "../middleware/";
-import { sendOTP } from "../utility";
 import { IPD_OPDController } from "../controller";
 const router = Router();
 router.get(
   "/patient/:phoneNumber",
-  authMiddleware,
   IPD_OPDController.fetchPatientByPhoneNumber
 );
 router.get("/patient", () => {});
