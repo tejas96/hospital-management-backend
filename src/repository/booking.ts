@@ -49,3 +49,19 @@ export const deleteBookRequest = async (id: string) => {
     .delete();
   return res;
 };
+
+export const fetchIpdPatientById = async (
+  patientId: string
+): Promise<Admin.firestore.DocumentData | null> => {
+  const patient = await Admin.firestore()
+    .collection("Bookings")
+    .where("patientId", "==", patientId)
+    .where("isCancelled", "==", false)
+    .where("wardType", "==", "IPD")
+    .get();
+  if (patient.empty) {
+    return null;
+  } else {
+    return { id: patient.docs[0].id, ...patient.docs[0].data() };
+  }
+};

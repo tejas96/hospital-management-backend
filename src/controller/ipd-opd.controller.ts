@@ -74,3 +74,14 @@ export const updateBooking = async (req: Request, res: Response) => {
     return res.status(401).send("Id not present in request");
   }
 };
+
+export const fetchIpdPatient = async (req: Request, res: Response) => {
+  const { patientId } = req.params;
+
+  const patient = await BookingRepo.fetchIpdPatientById(patientId);
+  if (patient) {
+    res.status(200).send(patient);
+  } else {
+    res.status(404).send("Patient not found");
+  }
+};
