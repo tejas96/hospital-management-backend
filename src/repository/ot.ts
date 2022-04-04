@@ -18,3 +18,11 @@ export const updateStatus = async (id: string, status: string) => {
     .doc(id)
     .update({ operation: status });
 };
+
+export const getBirthAndDeath = async () => {
+  const patient = await Admin.firestore()
+    .collection("Ot")
+    .where("operation", "in", ["Birth", "Death"])
+    .get();
+  return patient.docs;
+};

@@ -26,3 +26,21 @@ export const updateStatus = async (req: Request, res: Response) => {
   }
   return res.status(200).send("updated");
 };
+
+export const getBirthAndDeath = async (req: Request, res: Response) => {
+  const patients = await Ot.getBirthAndDeath();
+  const result = {
+    birth: 0,
+    death: 0,
+  };
+  patients.forEach((item) => {
+    if (item.data().operation === "Birth") {
+      result.birth += 1;
+    }
+    if (item.data().operation === "Death") {
+      result.death += 1;
+    }
+  });
+
+  res.send(result);
+};

@@ -4,6 +4,7 @@ import hospitalRoutes from "./hospital.routes";
 import authUserRoutes from "./authUsers.routes";
 import rfpROutes from "./rfp.routes";
 import OtRoutes from "./operationTheator.routes";
+import GraphRoutes from "./graph.routes";
 import express from "express";
 
 const app = express();
@@ -24,6 +25,7 @@ export const initRoutes = () => {
 
   app.use("/api/v1/ot", OtRoutes);
 
+  app.use("/api/v1/graph", GraphRoutes);
   //router for application health check
   app.get("/ping", (_, res) => {
     res.status(200).send("pong");
