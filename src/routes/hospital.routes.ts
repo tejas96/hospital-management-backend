@@ -17,4 +17,5 @@ router.delete(
   authMiddleware,
   HospitalController.deleteBookRequest
 );
+
 export default router;

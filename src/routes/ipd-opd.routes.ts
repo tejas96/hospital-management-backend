@@ -23,13 +23,12 @@ router.put(
   authMiddleware,
   IPD_OPDController.updateBooking
 );
+router.get(
+  "/patient/ipd/:patientId",
+  authMiddleware,
+  IPD_OPDController.fetchIpdPatient
+);
 router.put("/patient/:id", () => {});
 router.delete("/patient/:id", () => {});
-
-router.get("/patient/:id/invoice", () => {});
-router.get("/patient/:id/invoice/:invoiceId", () => {});
-router.post("/patient/:id/invoice", () => {});
-router.put("/patient/:id/invoice/:invoiceId", () => {});
-router.delete("/patient/:id/invoice/:invoiceId", () => {});
 
 export default router;

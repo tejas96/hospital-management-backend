@@ -3,6 +3,7 @@ import ipdOpdRoutes from "./ipd-opd.routes";
 import hospitalRoutes from "./hospital.routes";
 import authUserRoutes from "./authUsers.routes";
 import rfpROutes from "./rfp.routes";
+import OtRoutes from "./operationTheator.routes";
 import express from "express";
 
 const app = express();
@@ -20,6 +21,8 @@ export const initRoutes = () => {
   app.use("/api/v1/authUser", authUserRoutes);
 
   app.use("/api/v1/rfp", rfpROutes);
+
+  app.use("/api/v1/ot", OtRoutes);
 
   //router for application health check
   app.get("/ping", (_, res) => {
