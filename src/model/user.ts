@@ -1,6 +1,7 @@
 export enum UserRoles {
   ADMIN,
   FINANCE,
+  PATIENT,
 }
 
 export type LoggedInUser = {

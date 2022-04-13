@@ -41,11 +41,10 @@ export const fetchRfpByStatus = async (req: Request, res: Response) => {
 };
 
 export const createRfp = async (req: Request, res: Response) => {
-  const { productName, quantity, unitPrice } = req.body;
+  const { productName, quantity } = req.body;
   const rfp = await Admin.firestore().collection("rfp").add({
     name: productName,
     qty: quantity,
-    price: unitPrice,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     status: "Pending",

@@ -65,3 +65,18 @@ export const fetchIpdPatientById = async (
     return { id: patient.docs[0].id, ...patient.docs[0].data() };
   }
 };
+
+export const fetchPatientBookingsById = async (
+  patientId: string
+): Promise<Admin.firestore.DocumentData[] | null> => {
+  const patient = await Admin.firestore()
+    .collection("Bookings")
+    .where("patientId", "==", patientId)
+    .where("isCancelled", "==", false)
+    .get();
+  if (patient.empty) {
+    return null;
+  } else {
+    return patient.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  }
+};

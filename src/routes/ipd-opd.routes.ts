@@ -30,5 +30,8 @@ router.get(
 );
 router.put("/patient/:id", () => {});
 router.delete("/patient/:id", () => {});
-
+router.get(
+  "/patient/bookings/:patientId",
+  IPD_OPDController.fetchPatientBookings
+);
 export default router;
