@@ -13,7 +13,7 @@ router.get(
   HospitalController.fetchAllOnlineBookingRequests
 );
 router.delete(
-  "/online-book-request/:id",
+  "/online-book-request/:id/:status/:phoneNumber",
   authMiddleware,
   HospitalController.deleteBookRequest
 );

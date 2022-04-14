@@ -4,8 +4,8 @@ import { Booking, Patient as PatientDTO } from "../model";
 import { Booking as BookingRepo, Patient } from "../repository";
 import { ParameterDictionary } from "./RequestParamsDictionary";
 
-const bookingLimit = 100;
-const currentBooking = 0;
+const bookingLimit = 2;
+let currentBooking: number = 0;
 export const fetchPatientByPhoneNumber = async (
   req: Request<ParameterDictionary>,
   res: Response
@@ -38,6 +38,7 @@ export const bookAppointment = async (req: Request, res: Response) => {
     res.status(500).send("Booking limit reached");
     return;
   }
+  currentBooking++;
   const patientBook: Booking = req.body;
   patientBook.createdAt = new Date().getTime().toString();
   patientBook.updatedAt = new Date().getTime().toString();

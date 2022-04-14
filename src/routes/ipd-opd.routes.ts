@@ -34,4 +34,5 @@ router.get(
   "/patient/bookings/:patientId",
   IPD_OPDController.fetchPatientBookings
 );
+// router.get("/booking/reject", authMiddleware, IPD_OPDController.rejectBooking);
 export default router;

@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { sendOTP } from "../utility";
 import Admin from "../config/firebase";
 import { Booking } from "../repository";
 export const fetchAllDoctors = async (req: Request, res: Response) => {
@@ -37,8 +38,13 @@ export const fetchAllOnlineBookingRequests = async (
 };
 
 export const deleteBookRequest = async (req: Request, res: Response) => {
+  const { status, phoneNumber, id } = req.params;
+  console.log(status, phoneNumber);
+  if (status === "Rejected") {
+    sendOTP("+91" + phoneNumber, "Your booking request has been rejected");
+  }
   try {
-    await Booking.deleteBookRequest(req.params.id);
+    await Booking.deleteBookRequest(id);
   } catch (e) {
     return res.status(500).send({
       message: "Internal server error",
