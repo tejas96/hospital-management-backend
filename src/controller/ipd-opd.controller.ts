@@ -21,6 +21,7 @@ export const createPatient = async (req: Request, res: Response) => {
   const patientObject: PatientDTO = req.body;
   const patient = await Patient.createPatient(patientObject);
   if (patient.id) {
+    sendOTP('+91' + patientObject.phoneNumber, `Your Id is "#${patient.id}". Use this id for login`);
     res.status(200).send(patient.id);
   } else {
     res.status(500).send("Error creating patient");
