@@ -4,6 +4,8 @@ import { Booking, Patient as PatientDTO } from "../model";
 import { Booking as BookingRepo, Patient } from "../repository";
 import { ParameterDictionary } from "./RequestParamsDictionary";
 
+const bookingLimit = 100;
+const currentBooking = 0;
 export const fetchPatientByPhoneNumber = async (
   req: Request<ParameterDictionary>,
   res: Response
@@ -21,7 +23,10 @@ export const createPatient = async (req: Request, res: Response) => {
   const patientObject: PatientDTO = req.body;
   const patient = await Patient.createPatient(patientObject);
   if (patient.id) {
-    sendOTP('+91' + patientObject.phoneNumber, `Your Id is "#${patient.id}". Use this id for login`);
+    sendOTP(
+      "+91" + patientObject.phoneNumber,
+      `Your Id is "#${patient.id}". Use this id for login`
+    );
     res.status(200).send(patient.id);
   } else {
     res.status(500).send("Error creating patient");
@@ -29,6 +34,10 @@ export const createPatient = async (req: Request, res: Response) => {
 };
 
 export const bookAppointment = async (req: Request, res: Response) => {
+  if (currentBooking >= bookingLimit) {
+    res.status(500).send("Booking limit reached");
+    return;
+  }
   const patientBook: Booking = req.body;
   patientBook.createdAt = new Date().getTime().toString();
   patientBook.updatedAt = new Date().getTime().toString();
