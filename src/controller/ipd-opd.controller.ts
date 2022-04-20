@@ -107,3 +107,19 @@ export const fetchPatientBookings = async (req: Request, res: Response) => {
     res.status(404).send("Patient not found");
   }
 };
+
+export const updatePatient = async (req: Request, res: Response) => {
+  const patientObject: PatientDTO = req.body;
+  const { id } = req.params;
+  console.log(patientObject, id);
+  const patient = await Patient.updatePatient(id, patientObject);
+  if (patient) {
+    await BookingRepo.updatePatientName(
+      id,
+      `${patientObject.firstName} ${patientObject.lastName}`
+    );
+    res.status(200).send("Patient updated successfully");
+  } else {
+    res.status(500).send("Unable to update patient");
+  }
+};

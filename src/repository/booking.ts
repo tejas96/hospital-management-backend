@@ -80,3 +80,20 @@ export const fetchPatientBookingsById = async (
     return patient.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   }
 };
+
+export const updatePatientName = async (id: string, name: string) => {
+  const res = await Admin.firestore()
+    .collection("Bookings")
+    .where("patientId", "==", id)
+    .get();
+  const batch = Admin.firestore().batch();
+  if (!res.empty) {
+    res.docs.forEach(async (doc) => {
+      const docRef = Admin.firestore().collection("Bookings").doc(doc.id);
+      batch.update(docRef, { patientName: name });
+    });
+    await batch.commit();
+    return true;
+  }
+  return false;
+};

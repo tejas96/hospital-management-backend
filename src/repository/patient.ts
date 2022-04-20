@@ -22,3 +22,13 @@ export const createPatient = async (
     .add(patientObject);
   return patient;
 };
+
+export const updatePatient = async (id: string, patientObject: Patient) => {
+  const patient = await Admin.firestore()
+    .collection("Patients")
+    .doc(id)
+    .update(patientObject)
+    .then(() => true)
+    .catch(() => false);
+  return patient;
+};

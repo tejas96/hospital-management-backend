@@ -28,11 +28,11 @@ router.get(
   authMiddleware,
   IPD_OPDController.fetchIpdPatient
 );
-router.put("/patient/:id", () => {});
 router.delete("/patient/:id", () => {});
 router.get(
   "/patient/bookings/:patientId",
   IPD_OPDController.fetchPatientBookings
 );
 // router.get("/booking/reject", authMiddleware, IPD_OPDController.rejectBooking);
+router.put("/patient/:id", authMiddleware, IPD_OPDController.updatePatient);
 export default router;
